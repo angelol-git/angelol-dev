@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <div
+    id="container"
+    class="w-full h-full flex flex-col items-center bg-slate-100"
+  >
+    <main class="flex flex-col">
+      <h1 class="text-2xl font-bold">angelol.dev</h1>
+      <h2 class="m-0 text-xl font-bold">Projects</h2>
+      <ul class="m-0 py-2 px-0 flex flex-col gap-1">
+        <li>
+          <a href="https://github.com/angelol-git/measured" target="_blank"
+            >Measured <span class="text-sm">- Chrome Extension</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://softlyshaded.com/" target="_blank"
+            >Softly Shaded <span class="text-sm"
+              >- Static informational business website.</span
+            >
+          </a>
+        </li>
+        <li>
+          <a href="https://comparesffsize.angelol.dev/" target="_blank"
+            >CompareSFFSize <span class="text-sm">- Web app</span>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="https://github.com/angelol-git/YoutubeHomeSaver"
+            target="_blank"
+            >YoutubeHome Saver <span class="text-sm">- Chrome Extension</span>
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
 </Layout>
+
+<style>
+  @import "tailwindcss";
+
+  #container {
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+      Arial, sans-serif;
+  }
+
+  @media screen and (max-width: 768px) {
+  }
+</style>
