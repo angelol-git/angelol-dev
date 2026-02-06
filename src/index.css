@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+@import "tailwindcss";
+
+:root {
+  font-family:
+    "Inter", "Roboto", "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+    sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+@theme {
+  --font-lora: "Lora", serif;
+  --color-off-white: #e6e6e6;
+}
+
+section.content-list ul {
+  @apply list-disc list-inside space-y-2 ml-2;
+}
+section.content-list li {
+  @apply text-gray-300;
+}
