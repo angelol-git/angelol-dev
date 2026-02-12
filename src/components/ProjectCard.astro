@@ -7,17 +7,22 @@ const { slug, title, type, cover, description, url, github } = Astro.props;
 <li class="flex justify-between gap-6">
   <div class="flex-1">
     <a href={`/projects/${slug}`} class="flex gap-2 items-center link w-min">
-      <h3 class="text-off-white">{title}</h3>
+      <h3 class="text-off-white text-nowrap">{title}</h3>
       <MoveRight size={18} stroke-width={1.5} />
     </a>
     <p class="text-sm pt-2 text-zinc-500">{description}</p>
     <div class="flex gap-4 justify-end self-end pt-4">
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        <Globe
-          size={18}
-          class="stroke-gray-400 stroke-1 hover:stroke-gray-200 duration-150"
-        />
-      </a>
+      {
+        url && (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <Globe
+              size={18}
+              class="stroke-gray-400 stroke-1 hover:stroke-gray-200 duration-150"
+            />
+          </a>
+        )
+      }
+
       {
         github && (
           <a

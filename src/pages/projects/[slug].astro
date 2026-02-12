@@ -25,15 +25,20 @@ const { title, description, url, github, cover, tech } = project.data;
     </a>
     <h2 class="text-xl">{title}</h2>
     <div class="flex gap-6 items-center">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex gap-2 items-center"
-      >
-        <Globe size={18} class="stroke-gray-400 stroke-1" />
-        <div class="text-gray-400 text-sm">Live Site</div>
-      </a>
+      {
+        url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex gap-2 items-center"
+          >
+            <Globe size={18} class="stroke-gray-400 stroke-1" />
+            <div class="text-gray-400 text-sm">Live Site</div>
+          </a>
+        )
+      }
+
       {
         github && (
           <a
