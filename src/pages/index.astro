@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout>
@@ -25,17 +26,17 @@ const projects = await getCollection("projects");
       >
         PROJECTS
       </h2>
-      <ul class="flex flex-col gap-6">
+      <ul class="flex flex-col gap-10">
         {
-          projects.map((project) => (
+          sortedProjects.map((project) => (
             <ProjectCard
               slug={project.data.slug}
               title={project.data.title}
-              cover={project.data.cover}
-              type={project.data.type}
               description={project.data.description}
               url={project.data.url}
               github={project.data.github}
+              cover={project.data.cover}
+              tech={project.data.tech}
             />
           ))
         }
