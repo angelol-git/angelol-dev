@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 slug: comparesffsize
 title: "CompareSffSize.com"
 description: "An 3D comparison tool for visualizing and comparing Small Form Factor (SFF) PC case dimensions."
@@ -8,3 +8,31 @@ github: "https://github.com/angelol-git/comparesffsize"
 cover: "../../assets/covers/comparesffsize.avif"
 tech: ["React", "Tailwind CSS", "Three.js"]
 ---
+
+<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
+  Overview
+</h3>
+
+I built this project to make it easier to compare Small Form Factor (SFF) PC case sizes against each other. SFF cases are compact computer enclosures, typically under 20 liters in volume. While planning my own SFF build, I found it tedious to navigate multiple product pages just to gather basic size data. It was also difficult to meaningfully visualize the differences between cases, since they vary greatly in proportions. Similar sites like https://comparesizes.com/.com and https://comparesffpc.com/ exists, but I do not like the UX.
+
+<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
+  Notable Tech Used
+</h3>
+
+<h4>React Three Fiber/Three.js</h4>
+
+- React Three Fiber is an abstraction layer for Three.js (Three.js is a library for rendering 3D Objects in the web)
+- Capable of rendering 3D boxes that representing PC cases from real dimensions (width x height x length)
+- Uses a camera system so users can zoom and view multiple angles
+- Dynamic scene so cases can be added/removed at any time
+- React Three Fiber's robust ecosystem includes drei. Drei adds additional helpers such as a Bounds for an auto fitting camera, Orbit Controls for user navigation in the canvas and Edges to outline case boxes clearly.
+
+<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
+  Other Features
+</h3>
+
+- Add items from pre-populated database
+- Add custom items
+- Responsive design
+- Drag and Drop support
+- Persistent storage using localStorage

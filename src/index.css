@@ -14,12 +14,12 @@ body {
 
 @theme {
   --font-lora: "Lora", serif;
-  --color-off-white: #e6e6e6;
+  --color-primary: #1a1a1a;
 }
 
 section.content-list ul {
   @apply list-disc list-inside space-y-2 ml-2;
 }
 section.content-list li {
-  @apply text-gray-300;
+  @apply text-gray-600;
 }
