@@ -17,13 +17,11 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
       <p>
         Currently, I am focusing on building web applications with React and
         Node. My projects range from full-stack applications like <a
-          href="#"
-          target="_blank"
+          href="/projects/recipe"
           class="underline decoration-gray-400 hover:decoration-black"
-          >AI Recipe Manger</a
+          >AI Recipe Manager</a
         > to front end such as Chrome Extensions <a
-          href="#"
-          target="_blank"
+          href="/projects/measured"
           class="underline decoration-gray-400 hover:decoration-black"
           >Measured</a
         >.
@@ -51,7 +49,6 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
               cover={project.data.cover}
               tech={project.data.tech}
               background={project.data.background}
-              icon={project.data.icon}
             />
           ))
         }

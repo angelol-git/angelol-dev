@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import { MoveLeft, Globe } from "@lucide/astro";
 import Layout from "../../layouts/Layout.astro";
 import Github from "../../components/icons/Github.astro";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -54,8 +55,8 @@ const { title, description, url, github, cover, tech } = project.data;
       }
     </div>
 
-    <img
-      src={cover.src}
+    <Image
+      src={cover}
       alt={title}
       class="rounded-lg w-full h-auto object-cover shrink-0"
     />

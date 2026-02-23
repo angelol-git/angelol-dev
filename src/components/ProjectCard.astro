@@ -1,7 +1,8 @@
 ---
 import { ArrowUpRight, Globe } from "@lucide/astro";
 import Github from "./icons/Github.astro";
-const { slug, title, url, github, cover, description, tech, background, icon } =
+import { Image } from "astro:assets";
+const { slug, title, url, github, cover, description, tech, background } =
   Astro.props;
 ---
 
@@ -15,7 +16,7 @@ const { slug, title, url, github, cover, description, tech, background, icon } =
         class="flex gap-2 items-start after:absolute after:inset-0"
       >
         <div class="flex w-full justify-between items-center">
-          <h3 class="text-primary text-lg font-medium">{title}</h3>
+          <h3 class="text-primary text-lg">{title}</h3>
           <ArrowUpRight size={20} />
         </div>
       </a>
@@ -66,8 +67,8 @@ const { slug, title, url, github, cover, description, tech, background, icon } =
   </div>
 
   <div class="w-full md:w-64 shrink-0 overflow-hidden rounded-lg">
-    <img
-      src={cover.src}
+    <Image
+      src={cover}
       alt={title}
       class="w-full h-48 md:h-full object-cover"
       loading="lazy"
