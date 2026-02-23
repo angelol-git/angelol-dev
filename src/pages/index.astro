@@ -7,18 +7,26 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout>
-  <main class="flex flex-col w-full h-full max-w-2xl gap-12">
+  <main class="flex flex-col w-full h-full max-w-2xl gap-10">
     <div class="flex flex-col gap-1">
-      <h1 class="text-xl">Angelo Ladores</h1>
-      <p class="text-gray-500 font-light">Software Engineer</p>
+      <h1 class="text-2xl font-medium">Angelo Ladores</h1>
+      <p class="">Software Engineer</p>
     </div>
     <div class="flex flex-col gap-2">
       <p>Software Engineer located in Ontario, Canada.</p>
       <p>
         Currently, I am focusing on building web applications with React and
-        Node. My projects range from full-stack applications with AI integration
-        like <a href="#" target="_blank">AI Recipe Manger</a> to front end Chrome
-        Extensions <a href="#" target="_blank">Measured</a>.
+        Node. My projects range from full-stack applications like <a
+          href="#"
+          target="_blank"
+          class="underline decoration-gray-400 hover:decoration-black"
+          >AI Recipe Manger</a
+        > to front end such as Chrome Extensions <a
+          href="#"
+          target="_blank"
+          class="underline decoration-gray-400 hover:decoration-black"
+          >Measured</a
+        >.
       </p>
       <p>
         Towards this goal, I enjoy learning web fundamentals and vanilla
@@ -31,7 +39,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
       >
         PROJECTS
       </h2>
-      <ul class="flex flex-col gap-10">
+      <ul class="flex flex-col gap-6">
         {
           sortedProjects.map((project) => (
             <ProjectCard
@@ -42,6 +50,8 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
               github={project.data.github}
               cover={project.data.cover}
               tech={project.data.tech}
+              background={project.data.background}
+              icon={project.data.icon}
             />
           ))
         }

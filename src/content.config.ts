@@ -14,6 +14,8 @@ const projects = defineCollection({
       github: z.string().url().optional(),
       cover: image(),
       tech: z.array(z.string()).optional(),
+      background: z.string().optional(),
+      icon: image().optional(),
     }),
 });
 

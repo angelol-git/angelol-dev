@@ -1,36 +1,46 @@
 ---
-import { Image } from "astro:assets";
-import { MoveRight, Globe } from "@lucide/astro";
+import { ArrowUpRight, Globe } from "@lucide/astro";
 import Github from "./icons/Github.astro";
-const { slug, title, url, github, cover, description, tech } = Astro.props;
+const { slug, title, url, github, cover, description, tech, background, icon } =
+  Astro.props;
 ---
 
-<li class="flex flex-col md:flex-row md:justify-between gap-6">
-  <div class="flex flex-col gap-2 flex-1">
-    <div>
-      <a href={`/projects/${slug}`} class="flex gap-2 items-center link w-min">
-        <h3 class="text-primary text-nowrap">{title}</h3>
-        <MoveRight size={18} stroke-width={1.5} />
+<li
+  class="group relative flex flex-col md:flex-row p-5 rounded-xl md:justify-between gap-6 border-1 border-black/20 hover:border-black/40 hover:shadow-lg duration-150"
+>
+  <div class="flex flex-col gap-3 flex-1">
+    <div class="flex flex-col gap-2">
+      <a
+        href={`/projects/${slug}`}
+        class="flex gap-2 items-start after:absolute after:inset-0"
+      >
+        <div class="flex w-full justify-between items-center">
+          <h3 class="text-primary text-lg font-medium">{title}</h3>
+          <ArrowUpRight size={20} />
+        </div>
       </a>
-      <p class="text-sm pt-2 text-zinc-600">{description}</p>
+      <p class="text-sm text-zinc-600 line-clamp-2 md:line-clamp-none">
+        {description}
+      </p>
     </div>
 
-    <div class="flex gap-4 justify-between pt-4">
-      <ul class="flex gap-2">
+    <div class="mt-auto flex flex-col gap-4">
+      <ul class="flex flex-wrap gap-2 relative z-10">
         {
           tech.map((tag: string) => {
             return (
-              <li class="text-sm rounded-full px-2 border-1 text-zinc-600">
+              <li class="text-xs rounded-full px-2 py-0.5 border-1 text-zinc-500 border-zinc-200">
                 {tag}
               </li>
             );
           })
         }
       </ul>
-      <div class="flex gap-4">
+
+      <div class="flex gap-4 relative z-10">
         {
           url && (
-            <a href={url} target="_blank" rel="noopener noreferrer">
+            <a href={url} target="_blank" rel="noopener noreferrer" class="">
               <Globe
                 size={18}
                 class="stroke-gray-500 stroke-1 hover:stroke-gray-900 duration-150"
@@ -45,7 +55,7 @@ const { slug, title, url, github, cover, description, tech } = Astro.props;
               href={github}
               target="_blank"
               rel="noopener noreferrer"
-              class="cursor-pointer fill-gray-500"
+              class="cursor-pointer fill-gray-500 hover:fill-gray-900 "
             >
               <Github />
             </a>
@@ -54,32 +64,14 @@ const { slug, title, url, github, cover, description, tech } = Astro.props;
       </div>
     </div>
   </div>
-  <Image
-    src={cover}
-    alt={title}
-    class="rounded-lg w-full md:w-[200px] h-auto object-cover shrink-0"
-  />
+
+  <div class="w-full md:w-64 shrink-0 overflow-hidden rounded-lg">
+    <img
+      src={cover.src}
+      alt={title}
+      class="w-full h-48 md:h-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
 </li>
-
-<style>
-  .link {
-    position: relative;
-    text-decoration: none;
-  }
-
-  .link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: currentColor;
-    opacity: 0;
-    transition: opacity 150ms ease-out;
-  }
-
-  .link:hover::after {
-    opacity: 1;
-  }
-</style>

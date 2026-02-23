@@ -4,45 +4,13 @@ slug: recipe
 title: "AI Recipe Manager"
 description: "A full-stack recipe management app that uses Google Gemini to parse, modify and organize recipes."
 github: "https://github.com/angelol-git/ai_recipe"
-cover: "../../assets/covers/measured.avif"
+cover: "../../assets/covers/ai-recipe-manager.avif"
 tech: ["React", "Express", "SQL", "AI"]
+background: "#F1EAE4"
 ---
 
-<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
-  Overview****
+<h3 class="text-sm text-gray-500 uppercase tracking-widest text-muted-foreground">
+  Overview
 </h3>
 
-I created this project to streamline comparing online clothing measurements to your own. Everyday brands usually stick to standard sizing, but niche, designer or international items vary wildly. The most reliable way to know how an item is going to fit on you is a direct measurement comparison. This eliminates all the guesswork so you know exactly how something fits.
-
-<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
-  Demo
-</h3>
-This demo showcases adding a custom item and comparing it too an online listing
-on Grailed.com.
-
-<img
-  src="/measured_demo.gif"
-  alt="Measured Demo"
-  class="rounded-xl"
-  loading="lazy"
-/>
-
-<h3 class="text-sm text-gray-400 uppercase tracking-widest text-muted-foreground">
-  Notable Tech Used
-</h3>
-
-<h4>React</h4>
-
-- React was used for the popup/main window
-- High interactivity UI to avoid full page reloads
-- Component base design for high repetitive structures like ItemCard.
-- React Router to manage navigation between Home, Items, Add and Edit views
-- Context API handled global wardrobe state across various routes
-
-<h4>Web Extension API</h4>
-
-- Content scripts to scrape data using Mutation Observer API and inject UI directly into sites (Grailed and SSENSE.)
-- `chrome.storage.local` persists user wardrobe data
-  across sessions
-- Background service worker handles cross-origin requests and
-  caching
+I developed this website to organize, manage and modify recipes. I found many online recipes frustrating due to intrusive ads, lengthy introductions and inconsistent formatting. This project centralizes recipes in a single, structured location. It also supports recipe adjustments using AI to meet specific requirements, such as scaling quantities or altering ingredients. When an adjustment is made, a new variation of that recipe is created. So it is easy to keep track and compare different versions of the same recipe.
