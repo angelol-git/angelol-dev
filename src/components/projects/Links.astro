@@ -1,0 +1,35 @@
+---
+import { Globe } from "@lucide/astro";
+import Github from "../../components/icons/Github.astro";
+const { url, github } = Astro.props;
+---
+
+<div class="flex gap-6 items-center">
+  {
+    url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex gap-2 items-center"
+      >
+        <Globe size={18} class="stroke-1" />
+        <div class="text-sm">Live Site</div>
+      </a>
+    )
+  }
+
+  {
+    github && (
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex gap-2 items-center group"
+      >
+        <Github />
+        <div class="text-sm duration-150">Source Code</div>
+      </a>
+    )
+  }
+</div>

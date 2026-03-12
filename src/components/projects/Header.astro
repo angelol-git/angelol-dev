@@ -1,0 +1,10 @@
+---
+import { MoveLeft } from "@lucide/astro";
+const { title } = Astro.props;
+---
+
+<a href="/" class="flex gap-2 items-center w-min">
+  <MoveLeft size={18} />
+  <div>Back</div>
+</a>
+<h2 class="text-xl">{title}</h2>

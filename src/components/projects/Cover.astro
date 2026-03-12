@@ -1,0 +1,13 @@
+---
+import { Image } from "astro:assets";
+const { cover, title } = Astro.props;
+---
+
+<Image
+  src={cover}
+  alt={title}
+  width={1344}
+  height={672}
+  quality="high"
+  class="rounded-lg w-full h-auto object-cover shrink-0"
+/>
