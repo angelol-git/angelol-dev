@@ -20,12 +20,22 @@ const { title, url, github, cover, tech } = project.data;
 ---
 
 <Layout title={title}>
-  <main class="flex flex-col h-full w-full max-w-2xl gap-6">
+  <main class="flex flex-col h-full w-full max-w-2xl">
     <Header title={title} />
-    <Links url={url} github={github} />
-    <Cover cover={cover} title={title} />
-    <TechStack tech={tech} />
-    <section class="flex flex-col gap-6 prose content-list max-w-none">
+
+    <div class="mt-6">
+      <Links url={url} github={github} />
+    </div>
+
+    <div class="mt-8">
+      <Cover cover={cover} title={title} />
+    </div>
+
+    <div class="mt-8">
+      <TechStack tech={tech} />
+    </div>
+
+    <section class="flex flex-col gap-6 prose content-list max-w-none mt-10">
       <Content />
     </section>
   </main>
