@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 }
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, url, github, cover, tech } = project.data;
+const { title, url, github, cover, mainTech } = project.data;
 ---
 
 <Layout title={title}>
@@ -32,7 +32,7 @@ const { title, url, github, cover, tech } = project.data;
     </div>
 
     <div class="mt-8">
-      <TechStack tech={tech} />
+      <TechStack mainTech={mainTech} />
     </div>
 
     <section class="flex flex-col gap-6 prose content-list max-w-none mt-10">

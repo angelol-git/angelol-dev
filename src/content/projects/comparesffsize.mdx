@@ -2,32 +2,48 @@
 order: 5
 slug: comparesffsize
 title: "CompareSffSize"
-description: "An 3D comparison tool for visualizing and comparing Small Form Factor (SFF) PC case dimensions."
+description: "A 3D comparison tool for visualizing and comparing Small Form Factor (SFF) PC case dimensions."
 url: "https://comparesffsize.angelol.dev/"
 github: "https://github.com/angelol-git/comparesffsize"
-cover: "../../assets/covers/comparesffsize.webp"
-tech: ["React", "Tailwind CSS", "Three.js"]
+cover: "../../assets/covers/comparesffsize.jpg"
+mainTech: ["React", "Three.js", "Tailwind CSS"]
 background: "#E8EBFF"
 ---
 
-<h3>Overview</h3>
+<h3>Problem</h3>
 
-I built this project to make it easier to compare Small Form Factor (SFF) PC case sizes against each other. SFF cases are compact computer enclosures, typically under 20 liters in volume. While planning my own SFF build, I found it tedious to navigate multiple product pages just to gather basic size data. It was also difficult to meaningfully visualize the differences between cases, since they vary greatly in proportions. Similar sites like https://comparesizes.com/.com and https://comparesffpc.com/ exists, but I do not like the UX.
+While planning my own SFF (Small Form Factor, PC cases typically under 20 litres in volume) build, I found it tedious to navigate multiple product pages just to gather basic size data. It was also difficult to meaningfully visualize the differences between cases, since they vary greatly in proportions. Similar sites like <a href="https://comparesizes.com" target="_blank" rel="noopener noreferrer">comparesizes.com</a> and <a href="https://comparesffpc.com/" target="_blank" rel="noopener noreferrer">comparesffpc.com</a> exist, but I found their UX lacking.
+
+<h3>Solution</h3>
+
+Built a 3D comparison tool that renders PC cases from real dimensions. Includes a pre-populated database and option for users to add custom items for easy comparison. Deployed on a VPS with custom domain and SSL.
+
+<h3> Demo </h3>
+
+<video autoplay loop muted playsinline width="672">
+  <source src="/demos/comparesffsize_demo.webm" type="video/webm" />
+  <source src="/demos/comparesffsize_demo.mp4" type="video/mp4" />
+</video>
 
 <h3>Notable Tech Used</h3>
 
 <h4>React Three Fiber/Three.js</h4>
 
-- React Three Fiber is an abstraction layer for Three.js (Three.js is a library for rendering 3D Objects in the web)
-- Capable of rendering 3D boxes that representing PC cases from real dimensions (width x height x length)
+- React Three Fiber is an abstraction layer for Three.js (Three.js is a library for rendering 3D objects in the web)
+- Capable of rendering 3D boxes representing PC cases from real dimensions (width x height x length)
 - Uses a camera system so users can zoom and view multiple angles
-- Dynamic scene so cases can be added/removed at any time
-- React Three Fiber's robust ecosystem includes drei. Drei adds additional helpers such as a Bounds for an auto fitting camera, Orbit Controls for user navigation in the canvas and Edges to outline case boxes clearly.
+- React Three Fiber's robust ecosystem includes drei. Drei adds additional helpers such as Bounds for an auto-fitting camera, Orbit Controls for user navigation in the canvas, and Edges to outline case boxes clearly.
 
-<h3>Other Features</h3>
+<h3>Technical Challenges</h3>
 
-- Add items from pre-populated database
-- Add custom items
-- Responsive design
-- Drag and Drop support
-- Persistent storage using localStorage
+- **3D Scenes and Camera Positioning**: When rendering multiple objects it becomes difficult to guarantee every item fits in the same view. To ensure all objects fit in view, the camera was auto-centered using drei helpers. Object positions were calculated dynamically based on their widths and gaps, updating bounds whenever the selection changed.
+- **Drag and Drop**: The items list should be re ordered so the user can compare items side by side in the canvas. I originally implemented a drag and drop system using the native HTML Drag and Drop API however it does not support mobile input or keyboard events. An external library dnd-kit was used to provide additional accessibility.
+- **Form State Management**: The item form handles both creating new cases and editing existing ones, with different validation and initial states. Used a mode prop and conditional initialization. Plus careful handling of the category switches which clears or restores form data depending on context.
+- **Responsive Mobile Layout**: The split-pane design (3D canvas + item list) does not work well on mobile screens. This was solved by implementing a toggle view tab system where mobile users switch between the canvas and item list views.
+- **Database Management**: A JSON file was used as a simple client-side database to avoid setting up a server. Initially easy to manage, it became cumbersome as the project grew. A basic form was added to edit and download an updated JSON file.
+
+<h3>Lessons Learned</h3>
+
+- **React Three Fiber abstraction layer**: Learned how React Three Fiber simplifies Three.js development by treating 3D objects as React components with props and hooks, making 3D scenes more maintainable and declarative compared to imperative Three.js code.
+- **Drag and Drop accessibility**: Gained experience implementing accessible drag-and-drop using dnd-kit, including keyboard navigation support and proper ARIA labels for screen reader users.
+- **Data fetching with Caching**: Understood how TanStack Query's caching eliminates redundant network requests and provides consistent loading/error states across components, simplifying async data handling compared to manual fetch implementations.

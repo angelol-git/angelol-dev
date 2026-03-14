@@ -2,26 +2,29 @@
 order: 4
 slug: homesaver
 title: "HomeSaver"
-description: "A Chrome extension that saves Youtube Home page video links."
+description: "A Chrome extension that saves YouTube Home page video links."
 github: "https://github.com/angelol-git/homesaver-svelte"
 cover: "../../assets/covers/homesaver.webp"
-tech: ["Svelte", "Web Extension", "Tailwind CSS"]
+mainTech: ["Svelte", "Web Extension", "Tailwind CSS"]
 background: "#F0F0F0"
 ---
 
-<h3>Overview</h3>
+<h3>Problem</h3>
 
-I built this Chrome extension to solve a problem on the YouTube homepage, a misclick or refresh can instantly change recommendations and make it easy to lose a video you intended to watch. This extension automatically saves video links when ever the user visits the homepage.
+A problem I personally have on the YouTube homepage is a misclick or refresh can instantly change recommendations and make it easy to lose a video I intended to watch.
+
+<h3>Solution</h3>
+
+This extension automatically saves video links when ever the user visits the homepage. 4 different sets of 6 videos can be saved at one time.
 
 <h3>Notable Tech Used</h3>
 
 <h4>Svelte</h4>
 
 - Svelte with Vite was used for the popup/main window
-- Selected Svelte over React for its compile time architecture, producing smaller bundles and faster startup for a lightweight Chrome extension popup.
-- used Svelte's component model and built-in reactivity to simplify UI updates
-- Utilized Svelte’s built-in fade transition for lightweight UI animations without additional libraries.
-- Chose Svelte to learn a a new Framework other then React
+- Used Svelte's component model and built-in reactivity to simplify UI updates
+- Used Svelte's built-in fade transition for lightweight UI animations without additional libraries.
+- Chose Svelte to explore a framework beyond React.
 
 <h4>Content Scripts</h4>
 
@@ -29,3 +32,16 @@ I built this Chrome extension to solve a problem on the YouTube homepage, a misc
 - Handled YouTube's single-page navigation by listening for navigation events with MutationObserver fallback, ensuring data capture across route changes
 - Used the chrome.storage.local API, storing up to 4 sets of 6 videos with automatic cleanup when limits exceeded
 - Prevent storing redundant data when users refresh the same homepage
+
+<h3>Technical Challenges</h3>
+
+- **Fragile Data Parsing**: Originally I parsed metadata directly from DOM IDs and classes but that was unreliable since YouTube frequently changes its markup. Instead I extracted information from ytInitialData, YouTube’s internal JSON containing all homepage video data, making the parsing more robust and future-proof.
+- **Single-Page Navigation**: YouTube does not reload the page on navigation. It fires custom events like yt-navigate-finish to detect when the user is back on the homepage. Mutation Observer API was also used as a fallback.
+- **Script Injection & CSP**: Chrome’s Content Security Policy blocks Svelte’s default inline scripts. Fixed by externalizing dynamic imports in Vite and injecting scripts when necessary.
+
+<h3>Lessons Learned</h3>
+
+- **Framework Selection**: Learned that choosing the right framework can impact performance and developer experience. Svelte proved was a good choice for creating lightweight extension UIs.
+- **Browser Extension Architecture**: Gained experience structuring extensions with content scripts, background scripts, and popup contexts, and deciding when to use messaging vs storage.
+- **Testing Dev/Production Parity**: Learned the value of abstraction layers to simplify development and testing. I used a storage abstraction layer that automatically switches between extension chrome.storage.local (production) and localStorage (development). This let me test the popup UI without constantly building and reloading the extension in Chrome.
+- **SPA Navigation Patterns**: Understood the importance of listening to custom navigation events and handling client-side routing to reliably capture dynamic data.

@@ -16,8 +16,12 @@ body {
   @apply text-sm text-gray-500 uppercase tracking-widest;
 }
 
+.content-list a {
+  @apply underline;
+}
+
 .content-list h4 {
-  @apply -mb-4;
+  @apply -mb-4 font-bold;
 }
 
 @theme {
