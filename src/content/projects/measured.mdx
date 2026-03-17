@@ -5,39 +5,46 @@ title: "Measured"
 description: "A Chrome extension that compares online clothing measurements against your own wardrobe."
 github: "https://github.com/angelol-git/measured"
 cover: "../../assets/covers/measured.webp"
-mainTech: ["React", "Web Extension", "Vite"]
+mainTech: ["React", "Web Extension"]
 background: "#F0F0F0"
 ---
 
-<h3>Overview</h3>
+<h3>Problem</h3>
 
-I created this project to streamline comparing online clothing measurements to your own. Everyday brands usually stick to standard sizing, but niche, designer or international items vary wildly. The most reliable way to know how an item is going to fit on you is a direct measurement comparison. This eliminates all the guesswork so you know exactly how something fits.
+When shopping for clothing online, it can be difficult to determine if an item will fit properly without trying it on. Sizes vary significantly between brands, and measurement charts can be hard to interpret without a reference point.
+
+<h3>Solution</h3>
+
+Measured is a Chrome extension that automatically overlays measurement comparisons on supported e-commerce sites. Users can save their own clothing items with custom measurements, and the extension compares them side-by-side with items they're browsing, showing differences in both inches and centimeters with color-coded results.
 
 <h3>Demo</h3>
 
-This demo showcases adding a custom item and comparing it too an online listing on Grailed.com.
-
-<img
-  src="/demos/measured_demo.gif"
-  alt="Measured Demo"
-  class="rounded-xl"
-  loading="lazy"
-/>
+<video autoplay loop muted playsinline width="672">
+  <source src="/demos/measured_demo.webm" type="video/webm" />
+  <source src="/demos/measured_demo.mp4" type="video/mp4" />
+</video>
 
 <h3>Notable Tech Used</h3>
 
 <h4>React</h4>
 
-- React was used for the popup/main window
+- React with Vite was used for the popup/main window
 - High interactivity UI to avoid full page reloads
 - Component base design for high repetitive structures like ItemCard.
+- Used Zod for runtime data validation and type safety
 - React Router to manage navigation between Home, Items, Add and Edit views
 - Context API handled global wardrobe state across various routes
 
-<h4>Web Extension API</h4>
+<h3>Technical Challenges</h3>
 
-- Content scripts to scrape data using Mutation Observer API and inject UI directly into sites (Grailed and SSENSE.)
-- `chrome.storage.local` persists user wardrobe data
-  across sessions
-- Background service worker handles cross-origin requests and
-  caching
+- **Multi-Site Parsing**: Different e-commerce sites have completely different DOM structures. Grailed provides measurement data in tables with data attributes, while SSense uses modal based size charts with measurement images. Created separate parsing strategies for each platform.
+- **Dynamic Content**: Both sites use single page application architectures. Implemented MutationObservers to detect when measurement data loads dynamically.
+- **Measurement Mapping**: SSense uses measurement guide images with overlay positions that vary by product category. Built a mapping system (`ssenseData.js`) that maps CSS positioning to specific measurement types (chest, waist, length, etc.).
+- **State Management**: Managing data between the popup UI and content scripts required message passing through Chrome's runtime API
+- **Cross-Site Compatibility**: Each site uses different measurement formats (inches vs. centimeters and decimals). Implemented automatic unit conversion for accurate comparisons.
+
+<h3>Lessons Learned</h3>
+
+- **Extension Architecture**: Gained experience with Chrome Extension Manifest V3's service worker model, understanding the differences between background scripts, content scripts, and popup contexts.
+- **Web Scraping Resilience**: Learned that e-commerce sites frequently update their DOM structures. Built fallback parsing strategies (e.g., breadcrumb navigation when Next.js data isn't available) to maintain functionality across site updates.
+- **Data Validation**: Using Zod for runtime validation helped catch data inconsistencies early and provided better error messages during development.

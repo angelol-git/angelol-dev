@@ -9,22 +9,37 @@ mainTech: ["Astro", "Tailwind CSS", "TypeScript"]
 background: "#FFF0F3"
 ---
 
-<h3>Overview</h3>
+<h3>Problem</h3>
 
-Worked with Softly Shaded to consolidate their lash and brow services, pricing, and FAQ into a website.
+Softly Shaded's clients primarily found their work through Instagram and Facebook, but had a problem of scattered information across posts and stories. Client needed to consolidate their lash and brow services, pricing, and FAQ into a single location.
 
-Softly Shaded's clients primarily found them through Instagram and Facebook, but had a problem of scattered information across posts and stories. The website serves as a professional landing point that streamlines the booking process by presenting all essential business information in one accessible location.
+<h3>Solution</h3>
+
+Built a single page website with Astro's static site generation for optimal performance.
+The site features three main sections (Home, About and Services), a service catalog with detailed FAQs, and SEO optimization including structured data for local business discovery.
+
+<h3> Demo </h3>
+
+<video autoplay loop muted playsinline width="672">
+  <source src="/demos/softlyshaded_demo.webm" type="video/webm" />
+  <source src="/demos/softylshaded_demo.mp4" type="video/mp4" />
+</video>
 
 <h3>Notable Tech Used</h3>
 
 <h4>Astro</h4>
 
-- A static site generator was used for high performance and simplicity
+- Used Astro's static site generation for fast, SEO-friendly pages with zero client-side JavaScript by default
 - Repetitive designs in pricing tables and FAQs made it ideal for component based templating
-- Astro Content Collections organized services and FAQs in structured markdown files, no CMS needed for content that changes infrequently
-- More complex technologies like Next or React was unnecessary due to limited interactivity
+- Astro Content Collections organized to manage service data (Ombre Brows, Lash Extensions, Lash Lift) with TypeScript schema validation, no CMS needed for content that changes infrequently
 
-<h3>Other Features</h3>
+<h3>Technical Challenges</h3>
 
-- Responsive design
--
+- **Content Management**: Services required complex data structures including pricing tiers, duration, preparation notes, and detailed FAQs. Solved by defining a type-safe Zod schema with nested objects and arrays.
+- **SEO Optimization**: Local service businesses rely heavily on search visibility. Implemented JSON-LD structured data with Schema.org's BeautySalon type, including service catalog, pricing, and location data
+- **Asset Optimization**: Balancing visual appeal with performance. Used WebP format for photos, SVG for illustrations and logos
+
+<h3>Lessons Learned</h3>
+
+- **Content-Driven Architecture**: Astro's content collections proved ideal for service based businesses where content updates infrequently (pricing, availability, FAQs) without needing full code changes.
+- **Static Site Benefits**: For brochure style websites, static generation eliminates server costs and security concerns while delivering high performance Lighthouse metrics.
