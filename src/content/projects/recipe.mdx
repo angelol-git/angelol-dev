@@ -9,6 +9,80 @@ mainTech: ["React", "Express", "SQL", "AI"]
 background: "#F1EAE4"
 ---
 
-<h3>Overview</h3>
+<h3>Problem</h3>
 
-I developed this website to organize, manage and modify recipes. I found many online recipes frustrating due to intrusive ads, lengthy introductions and inconsistent formatting. This project centralizes recipes in a single, structured location. It also supports recipe adjustments using AI to meet specific requirements, such as scaling quantities or altering ingredients. When an adjustment is made, a new variation of that recipe is created. So it is easy to keep track and compare different versions of the same recipe.
+I found recipe management tedious. Many online recipes are frustrating due to intrusive ads, lengthy introductions and inconsistent formatting. Saving recipes from websites often involves manual copying and adapting recipes for different serving sizes, ingredient substitutes, or specific dietary restrictions. There was no easy way to iterate on recipes or asking questions without searching multiple sources.
+
+<h3>Solution</h3>
+
+I created a full-stack recipe manager that uses AI to automate recipe extraction and modification. Users can paste URLs or text to automatically generate structured recipes, scale ingredients for different serving sizes and make ingredient substitutions. When an adjustment is made, a new variation of that recipe is created. So it is easy to keep track and compare different versions of the same recipe.
+
+<h3>Demo</h3>
+
+<h3>Notable Front-end Tech</h3>
+
+<h4>React</h4>
+
+- **Component Architecture**: For modular UI components RecipeCards, ChatInput, Toast, and etc.
+- **Local state management**: for high interactivity components modals open/close, sidebar visibility and chat input state
+- **Context API**: for global toast notifications across the app
+
+<h4>TanStack Query</h4>
+
+- **Data Fetching**: Used for useRecipes, useUser, useTags hooks to fetch recipe lists, user auth state, and tags from the backend
+- **Caching**: Recipes data is cached to avoid redundant API calls when navigating between pages
+- **Optimistic Updates**: Used for instant UI feedback when adding/deleting recipes (inferred from the useDeleteRecipe hook pattern)
+
+<h4>React Router</h4>
+
+- **Nested Routes and Layout Pattern**: Chat interface uses nested routing (/chat parent with /chat/:id children) where ChatLayout provides shared context to child routes via useOutletContext to NewChat and (exisiting) Chat components
+- **Dynamic Parameters**: :id in route paths loads specific recipes (e.g., /chat/abc-123 loads recipe with that ID)
+
+<h3>Notable Back-end Tech</h3>
+
+<h4>Express</h4>
+
+- **Routes**: Separate route files for clean separation of concerns:
+  - auth.js: Google OAuth login/logout, session cookie management, auth check endpoints
+  - recipes.js: Full CRUD for recipes including versioning, tags, and error retrieval
+  - chat.js: Recipe creation via AI prompt, URL extraction integration
+- **Middleware**: authMiddleware validates session cookies on protected routes; optionalAuth allows guest users to create recipes without saving to DB
+
+<h4>better-sqlite3</h4>
+
+- **Schema Design**:
+  - users table: stores Google OAuth profiles
+  - sessions table: for 30-day cookie-based authentication
+  - recipes table: with self-referencing parent_id for recipe versioning/forking
+  - recipe_versions: stores actual recipe content (ingredients, instructions as JSON strings) with metadata (servings, calories, AI model used)
+  - messages table: for chat history between users and AI assistant
+  - tags and recipe_tags: for many-to-many organization
+- **Foreign Key Constraints**: ON DELETE CASCADE ensures clean cleanup when recipes or users are deleted
+
+<h4>Google GenAI (Gemini)</h4>
+
+- **Recipe Parsing**: Converts freeform text/URLs into structured recipe JSON with title, ingredients, instructions, servings, calories, total_time
+- **Modification Detection**: Prompt logic distinguishes between new recipes vs modifications (scaling: "double the recipe", substitutions: "make it vegan")
+- **Scaling Mathematics**: Calculates proportional ingredient adjustments and maintains per-serving calories when scaling up/down
+- **Content Guardrails**: Validates that input is actually food-related; returns empty structure for gibberish/unrelated prompts
+
+<h4>Cheerio + Impit</h4>
+
+- **Impit**: Browser emulation library that fetches URLs with Chrome headers to bypass basic bot detection on recipe sites
+- **JSON-LD Priority**: First attempts to parse application/ld+json scripts for structured Recipe schema data (most reliable)
+- **HTML Fallback**: If no schema found, removes noise elements (nav, footer, ads, scripts, images) with Cheerio selectors, converts remaining content to clean Markdown using Turndown
+- **URL Validation**: Regex detection in user messages + isValidUrl() utility to prevent malicious URL inputs
+
+<h3>Technical Challenges</h3>
+
+- **Guest vs. Authenticated User Flow**: Initially built the app for authenticated users only with full database persistence, but realized forcing account creation before trying the app created friction for potential users. Refactored the authentication layer to support both flows by implementing optionalAuth middleware that attaches req.user for logged-in users or leaves it null for guests. This allowed the existing recipe creation endpoint to either database saves. While guests recipes saved in the browser local storage.
+- **Recipe Versioning**: Users want to modify recipes through AI (scaling servings, making substitutions) but need to preserve the original and navigate between different versions.Traditional AI chat apps present conversations where previous responses scroll away and become difficult to reference. Instead of infinite scrolling, users navigate between recipe iterations with ChatNavigation controls that preserve the complete version history.
+- **AI Prompt Engineering**: LLMs can return unpredictable responses, malformed JSON or irrelevant messages when the user input off topic messages. Created prompts to handle recipe extraction, modification detection (scaling, substitutions), and content relevancy guardrails. Implemented fallback validation when AI returns malformed JSON or empty responses.
+- **Web Scraping Reliability**: Recipe sites have inconsistent HTML structures. Used Cheerio to parse JSON-LD schema when available, with HTML-to-Markdown fallback for unstructured pages.
+
+<h3>Lesson Learned</h3>
+
+- **AI Integration**: Working with LLMs requires many robust validation layers. AI responses can be unpredictable—building fallback parsing (cleaning markdown code blocks, validating required fields) was essential for stability.
+- **Prompt Design**: Breaking complex tasks into clear, structured prompts with explicit rules (scaling logic, content filtering) dramatically improved AI response accuracy.
+- **Web Scraping Resilience**: Sites frequently change their DOM structure. Prioritizing JSON-LD schema parsing over HTML scraping provided more stable recipe extraction.
+- **Feature Gating via Auth**: Used authentication state to naturally tier features. Authenticated users unlock persistence, guests can still find immediate value.

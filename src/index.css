@@ -31,3 +31,12 @@ body {
 section.content-list ul {
   @apply list-disc list-inside space-y-2 ml-2;
 }
+
+.content-list ul ul {
+  @apply list-none ml-4;
+}
+
+.content-list ul ul li::before {
+  content: "– ";
+  margin-right: 0.5rem;
+}
