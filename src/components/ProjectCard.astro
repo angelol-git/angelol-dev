@@ -17,7 +17,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
       >
         <div class="flex w-full justify-between items-center">
           <h3 class="font-display text-xl text-ink">{title}</h3>
-          <ArrowUpRight size={20} class="text-ink-muted" />
+          <ArrowUpRight size={20} stroke-width={1.5} class="text-ink-muted" />
         </div>
       </a>
       <p class="text-sm text-ink-muted leading-relaxed">
@@ -30,7 +30,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
         {
           mainTech.map((tag: string) => {
             return (
-              <li class="font-mono text-xs px-3 py-1 rounded-full border border-border-custom text-ink-muted">
+              <li class="font-mono text-xs px-3 py-1 rounded-full border border-ink-muted text-ink">
                 {tag}
               </li>
             );
@@ -41,16 +41,13 @@ const { slug, title, url, github, cover, description, mainTech, background } =
       <div class="flex gap-4 relative z-10">
         {
           url && (
-            <a 
-              href={url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
               class="text-ink-muted hover:text-accent transition-colors duration-150"
             >
-              <Globe
-                size={18}
-                stroke-width={1.5}
-              />
+              <Globe size={18} stroke-width={1.5} />
             </a>
           )
         }

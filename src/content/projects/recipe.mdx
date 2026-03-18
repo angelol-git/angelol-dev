@@ -94,6 +94,15 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 
 </div>
 
+<div>
+<h4>Infrastructure</h4>
+
+- **Self-hosted VPS**: Deployed on personal VPS with Ubuntu, Nginx reverse proxy, and PM2 process management
+- **SSL/TLS**: Configured Let's Encrypt certificates for HTTPS
+- **Environment Management**: Production and development configurations with `.env`
+
+</div>
+
 <h3>Technical Challenges</h3>
 
 - **Guest vs. Authenticated User Flow**: Initially built the app for authenticated users only with full database persistence, but realized forcing account creation before trying the app created friction for potential users. Refactored the authentication layer to support both flows by implementing optionalAuth middleware that attaches req.user for logged-in users or leaves it null for guests. This allowed the existing recipe creation endpoint to either save to the database. While guests recipes saved in the browser local storage.
