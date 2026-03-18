@@ -15,7 +15,7 @@ A problem I personally have on the YouTube homepage is a misclick or refresh can
 
 <h3>Solution</h3>
 
-This extension automatically saves video links when ever the user visits the homepage. 4 different sets of 6 videos can be saved at one time.
+This extension automatically saves video links whenever the user visits the homepage. 4 different sets of 6 videos can be saved at one time.
 
 <h3> Demo </h3>
 
@@ -46,5 +46,5 @@ This extension automatically saves video links when ever the user visits the hom
 <h3>Lessons Learned</h3>
 
 - **Framework Selection**: Learned that choosing the right framework can impact performance and developer experience. Svelte was a good choice for creating lightweight extension UIs.
-- **Browser Extension Architecture**: Gained experience structuring extensions with content scripts, background scripts, and popup contexts, and deciding when to use messaging vs storage.
+- **Browser Extension Architecture**: Gained experience structuring extensions with content scripts, background scripts, and popup contexts, and deciding when to use messaging vs. storage.
 - **Testing Dev/Production Parity**: Learned the value of abstraction layers to simplify development and testing. I used a storage abstraction layer that automatically switches between extension chrome.storage.local (production) and localStorage (development). This let me test the popup UI without constantly building and reloading the extension in Chrome.

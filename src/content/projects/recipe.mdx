@@ -24,7 +24,7 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 <div>
 <h4>React</h4>
 
-- **Component Architecture**: For modular UI components RecipeCards, ChatInput, Toast, and etc.
+- **Component Architecture**: For modular UI components RecipeCards, ChatInput, Toast, etc.
 - **Local state management**: for high interactivity components modals open/close, sidebar visibility and chat input state
 - **Context API**: for global toast notifications across the app
 
@@ -42,7 +42,7 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 <div>
 <h4>React Router</h4>
 
-- **Nested Routes and Layout Pattern**: Chat interface uses nested routing (/chat parent with /chat/:id children) where ChatLayout provides shared context to child routes via useOutletContext to NewChat and (exisiting) Chat components
+- **Nested Routes and Layout Pattern**: Chat interface uses nested routing (/chat parent with /chat/:id children) where ChatLayout provides shared context to child routes via useOutletContext to NewChat and (existing) Chat components
 - **Dynamic Parameters**: :id in route paths loads specific recipes (e.g., /chat/abc-123 loads recipe with that ID)
 
 </div>
@@ -78,7 +78,7 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 <h4>Google GenAI (Gemini)</h4>
 
 - **Recipe Parsing**: Converts freeform text/URLs into structured recipe JSON with title, ingredients, instructions, servings, calories, total_time
-- **Modification Detection**: Prompt logic distinguishes between new recipes vs modifications (scaling: "double the recipe", substitutions: "make it vegan")
+- **Modification Detection**: Prompt logic distinguishes between new recipes vs modifications (scaling: "double the recipe")
 - **Scaling Mathematics**: Calculates proportional ingredient adjustments and maintains per-serving calories when scaling up/down
 - **Content Guardrails**: Validates that input is actually food-related; returns empty structure for gibberish/unrelated prompts
 
@@ -96,12 +96,12 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 
 <h3>Technical Challenges</h3>
 
-- **Guest vs. Authenticated User Flow**: Initially built the app for authenticated users only with full database persistence, but realized forcing account creation before trying the app created friction for potential users. Refactored the authentication layer to support both flows by implementing optionalAuth middleware that attaches req.user for logged-in users or leaves it null for guests. This allowed the existing recipe creation endpoint to either database saves. While guests recipes saved in the browser local storage.
-- **Recipe Versioning**: Users want to modify recipes through AI (scaling servings, making substitutions) but need to preserve the original and navigate between different versions.Traditional AI chat apps present conversations where previous responses scroll away and become difficult to reference. Instead of infinite scrolling, users navigate between recipe iterations with ChatNavigation controls that preserve the complete version history.
-- **AI Prompt Engineering**: LLMs can return unpredictable responses, malformed JSON or irrelevant messages when the user input off topic messages. Created prompts to handle recipe extraction, modification detection (scaling, substitutions), and content relevancy guardrails. Implemented fallback validation when AI returns malformed JSON or empty responses.
+- **Guest vs. Authenticated User Flow**: Initially built the app for authenticated users only with full database persistence, but realized forcing account creation before trying the app created friction for potential users. Refactored the authentication layer to support both flows by implementing optionalAuth middleware that attaches req.user for logged-in users or leaves it null for guests. This allowed the existing recipe creation endpoint to either save to the database. While guests recipes saved in the browser local storage.
+- **Recipe Versioning**: Users want to modify recipes through AI (scaling servings, making substitutions) but need to preserve the original and navigate between different versions. Traditional AI chat apps present conversations where previous responses scroll away and become difficult to reference. Instead of infinite scrolling, users navigate between recipe iterations with ChatNavigation controls that preserve the complete version history.
+- **AI Prompt Engineering**: LLMs can return unpredictable responses, malformed JSON or irrelevant messages when the user input off-topic messages. Created prompts to handle recipe extraction, modification detection (scaling, substitutions), and content relevancy guardrails. Implemented fallback validation when AI returns malformed JSON or empty responses.
 - **Web Scraping Reliability**: Recipe sites have inconsistent HTML structures. Used Cheerio to parse JSON-LD schema when available, with HTML-to-Markdown fallback for unstructured pages.
 
-<h3>Lesson Learned</h3>
+<h3>Lessons Learned</h3>
 
 - **AI Integration**: Working with LLMs requires many robust validation layers. AI responses can be unpredictable—building fallback parsing (cleaning markdown code blocks, validating required fields) was essential for stability.
 - **Prompt Design**: Breaking complex tasks into clear, structured prompts with explicit rules (scaling logic, content filtering) dramatically improved AI response accuracy.

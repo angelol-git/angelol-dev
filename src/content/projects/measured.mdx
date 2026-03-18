@@ -40,7 +40,7 @@ Measured is a Chrome extension that automatically overlays measurement compariso
 
 <h3>Technical Challenges</h3>
 
-- **Multi-Site Parsing**: Different e-commerce sites have completely different DOM structures. Grailed provides measurement data in tables with data attributes, while SSense uses modal based size charts with measurement images. Created separate parsing strategies for each platform.
+- **Multi-Site Parsing**: Different e-commerce sites have completely different DOM structures. Grailed provides measurement data in tables with data attributes, while SSENSE uses modal based size charts with measurement images. Created separate parsing strategies for each platform.
 - **Dynamic Content**: Both sites use single page application architectures. Implemented MutationObservers to detect when measurement data loads dynamically.
 - **Measurement Mapping**: SSense uses measurement guide images with overlay positions that vary by product category. Built a mapping system (`ssenseData.js`) that maps CSS positioning to specific measurement types (chest, waist, length, etc.).
 - **State Management**: Managing data between the popup UI and content scripts required message passing through Chrome's runtime API
