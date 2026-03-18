@@ -3,9 +3,7 @@ const { mainTech } = Astro.props;
 ---
 
 <div class="flex flex-col gap-3">
-  <h3
-    class="text-sm text-gray-500 uppercase tracking-widest text-muted-foreground"
-  >
+  <h3 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
     Main Tech Stack
   </h3>
   <ul class="flex gap-2">
@@ -13,7 +11,9 @@ const { mainTech } = Astro.props;
       mainTech &&
         mainTech.map((item: string) => {
           return (
-            <li class="text-sm border-1 rounded-full px-3 py-1">{item}</li>
+            <li class="font-mono text-sm border border-ink-muted rounded-full px-3 py-1 text-ink-light">
+              {item}
+            </li>
           );
         })
     }

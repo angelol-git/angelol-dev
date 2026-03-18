@@ -21,25 +21,35 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 
 <h3>Notable Front-end Tech</h3>
 
+<div>
 <h4>React</h4>
 
 - **Component Architecture**: For modular UI components RecipeCards, ChatInput, Toast, and etc.
 - **Local state management**: for high interactivity components modals open/close, sidebar visibility and chat input state
 - **Context API**: for global toast notifications across the app
 
+</div>
+
+<div>
 <h4>TanStack Query</h4>
 
 - **Data Fetching**: Used for useRecipes, useUser, useTags hooks to fetch recipe lists, user auth state, and tags from the backend
 - **Caching**: Recipes data is cached to avoid redundant API calls when navigating between pages
 - **Optimistic Updates**: Used for instant UI feedback when adding/deleting recipes (inferred from the useDeleteRecipe hook pattern)
 
+</div>
+
+<div>
 <h4>React Router</h4>
 
 - **Nested Routes and Layout Pattern**: Chat interface uses nested routing (/chat parent with /chat/:id children) where ChatLayout provides shared context to child routes via useOutletContext to NewChat and (exisiting) Chat components
 - **Dynamic Parameters**: :id in route paths loads specific recipes (e.g., /chat/abc-123 loads recipe with that ID)
 
+</div>
+
 <h3>Notable Back-end Tech</h3>
 
+<div>
 <h4>Express</h4>
 
 - **Routes**: Separate route files for clean separation of concerns:
@@ -48,6 +58,9 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
   - chat.js: Recipe creation via AI prompt, URL extraction integration
 - **Middleware**: authMiddleware validates session cookies on protected routes; optionalAuth allows guest users to create recipes without saving to DB
 
+</div>
+
+<div>
 <h4>better-sqlite3</h4>
 
 - **Schema Design**:
@@ -59,6 +72,9 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
   - tags and recipe_tags: for many-to-many organization
 - **Foreign Key Constraints**: ON DELETE CASCADE ensures clean cleanup when recipes or users are deleted
 
+</div>
+
+<div>
 <h4>Google GenAI (Gemini)</h4>
 
 - **Recipe Parsing**: Converts freeform text/URLs into structured recipe JSON with title, ingredients, instructions, servings, calories, total_time
@@ -66,12 +82,17 @@ I created a full-stack recipe manager that uses AI to automate recipe extraction
 - **Scaling Mathematics**: Calculates proportional ingredient adjustments and maintains per-serving calories when scaling up/down
 - **Content Guardrails**: Validates that input is actually food-related; returns empty structure for gibberish/unrelated prompts
 
+</div>
+
+<div>
 <h4>Cheerio + Impit</h4>
 
 - **Impit**: Browser emulation library that fetches URLs with Chrome headers to bypass basic bot detection on recipe sites
 - **JSON-LD Priority**: First attempts to parse application/ld+json scripts for structured Recipe schema data (most reliable)
 - **HTML Fallback**: If no schema found, removes noise elements (nav, footer, ads, scripts, images) with Cheerio selectors, converts remaining content to clean Markdown using Turndown
 - **URL Validation**: Regex detection in user messages + isValidUrl() utility to prevent malicious URL inputs
+
+</div>
 
 <h3>Technical Challenges</h3>
 

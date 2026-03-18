@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
-import Header from "../../components/Projects/Header.astro";
-import Links from "../../components/Projects/Links.astro";
-import Cover from "../../components/Projects/Cover.astro";
-import TechStack from "../../components/Projects/TechStack.astro";
+import Header from "../../components/projects/Header.astro";
+import Links from "../../components/projects/Links.astro";
+import Cover from "../../components/projects/Cover.astro";
+import TechStack from "../../components/projects/TechStack.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -20,22 +20,22 @@ const { title, url, github, cover, mainTech } = project.data;
 ---
 
 <Layout title={title}>
-  <main class="flex flex-col h-full w-full max-w-2xl">
+  <main class="flex flex-col h-full w-full max-w-2xl gap-6">
     <Header title={title} />
 
-    <div class="mt-6">
+    <div>
       <Links url={url} github={github} />
     </div>
 
-    <div class="mt-8">
+    <div>
       <Cover cover={cover} title={title} />
     </div>
 
-    <div class="mt-8">
+    <div>
       <TechStack mainTech={mainTech} />
     </div>
 
-    <section class="flex flex-col gap-6 prose content-list max-w-none mt-10">
+    <section class="flex flex-col gap-6 content-list max-w-none">
       <Content />
     </section>
   </main>

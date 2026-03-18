@@ -1,42 +1,102 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  font-family:
-    "Inter", "Roboto", "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
-    sans-serif;
+@theme {
+  --color-paper: #faf9f6;
+  --color-ink: #1c1c1e;
+  --color-ink-light: #3d3d3d;
+  --color-ink-muted: #6b6b6b;
+  --color-accent: #b87333;
+  --color-accent-light: #d4a574;
+  --color-border-custom: #e5e5e0;
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Content styling */
 .content-list h3 {
-  @apply text-sm text-gray-500 uppercase tracking-widest;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-ink-muted);
 }
 
 .content-list a {
-  @apply underline;
+  color: var(--color-accent);
 }
 
 .content-list h4 {
-  @apply -mb-4 font-bold;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
 }
 
-@theme {
-  --font-lora: "Lora", serif;
+section.content-list ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
-section.content-list ul {
-  @apply list-disc list-inside space-y-2 ml-2;
-}
-
-.content-list ul ul {
-  @apply list-none ml-4;
+section.content-list ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
 }
 
 .content-list ul ul li::before {
-  content: "– ";
-  margin-right: 0.5rem;
+  content: "";
+  width: 8px;
+  height: 1px;
+  border-radius: 0;
+  top: 0.75rem;
+  background-color: var(--color-ink-muted);
+}
+
+/* Prose overrides */
+.prose {
+  max-width: none;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  color: var(--color-ink-light);
+}
+
+.prose strong {
+  font-weight: 500;
+  color: var(--color-ink);
 }

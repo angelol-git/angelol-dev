@@ -11,10 +11,10 @@ const { url, github } = Astro.props;
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex gap-2 items-center"
+        class="flex gap-2 items-center text-accent"
       >
         <Globe size={18} class="stroke-1" />
-        <div class="text-sm">Live Site</div>
+        <div class="font-mono text-sm">Live Site</div>
       </a>
     )
   }
@@ -25,10 +25,10 @@ const { url, github } = Astro.props;
         href={github}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex gap-2 items-center group"
+        class="flex gap-2 items-center group text-ink-muted hover:text-accent transition-colors duration-150"
       >
         <Github />
-        <div class="text-sm duration-150">Source Code</div>
+        <div class="font-mono text-sm">Source Code</div>
       </a>
     )
   }
