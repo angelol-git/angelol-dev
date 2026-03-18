@@ -10,7 +10,6 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ? title : "angelol.dev"}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,11 +18,24 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="AngeloL" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
   </head>
   <body>
-    <div
-      class="w-full min-h-screen flex justify-center px-5 py-20"
-    >
+    <div class="w-full min-h-screen flex justify-center px-5 py-20">
       <slot />
     </div>
   </body>
