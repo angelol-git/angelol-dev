@@ -16,10 +16,10 @@ export async function getStaticPaths() {
 }
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, url, github, cover, mainTech } = project.data;
+const { title, description, url, github, cover, mainTech } = project.data;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <main class="flex flex-col h-full w-full max-w-2xl gap-6">
     <Header title={title} />
 
