@@ -2,8 +2,15 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+
 const projects = await getCollection("projects");
 const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
+const selectedWork = sortedProjects.filter(
+  (project) => project.data.section === "selected",
+);
+const projectWork = sortedProjects.filter(
+  (project) => project.data.section === "projects",
+);
 ---
 
 <Layout
@@ -19,8 +26,12 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
     <div class="flex flex-col gap-3 text-ink-light">
       <p>Software Engineer located in Ontario, Canada.</p>
       <p>
-        Currently, I am focusing on building web applications with React and
-        Node. My projects range from full-stack applications like <a
+        I build web applications with React, Node, and modern frontend tools.
+        My work includes shipped client websites as well as personal products
+        and technical experiments.
+      </p>
+      <p>
+        Recent projects range from full-stack applications like <a
           href="/projects/recipe"
           class="text-accent underline decoration-accent-light"
           >Recipe Manager</a
@@ -30,37 +41,61 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
         >.
       </p>
       <p>
-        Towards this goal, I enjoy learning about other web technologies like
-        Svelte with <a
+        I also like exploring other web technologies, including Svelte with <a
           href="/projects/homesaver"
           class="text-accent underline decoration-accent-light">HomeSaver</a
-        > or Astro as used in <a
+        > and Astro in <a
           href="/projects/softlyshaded"
           class="text-accent underline decoration-accent-light">SoftlyShaded</a
         >. Whatever the stack, I'm always trying to find the most effective
         solution that solves the problem.
       </p>
     </div>
-    <section class="flex flex-col gap-6">
-      <h2 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
-        Projects
-      </h2>
-      <ul class="flex flex-col gap-6">
-        {
-          sortedProjects.map((project) => (
-            <ProjectCard
-              slug={project.data.slug}
-              title={project.data.title}
-              description={project.data.description}
-              url={project.data.url}
-              github={project.data.github}
-              cover={project.data.cover}
-              mainTech={project.data.mainTech}
-              background={project.data.background}
-            />
-          ))
-        }
-      </ul>
-    </section>
+    {
+      selectedWork.length > 0 && (
+        <section class="flex flex-col gap-6">
+          <h2 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
+            Selected Work
+          </h2>
+          <ul class="flex flex-col gap-6">
+            {selectedWork.map((project) => (
+              <ProjectCard
+                slug={project.data.slug}
+                title={project.data.title}
+                description={project.data.description}
+                url={project.data.url}
+                github={project.data.github}
+                cover={project.data.cover}
+                mainTech={project.data.mainTech}
+                background={project.data.background}
+              />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+    {
+      projectWork.length > 0 && (
+        <section class="flex flex-col gap-6">
+          <h2 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
+            Projects
+          </h2>
+          <ul class="flex flex-col gap-6">
+            {projectWork.map((project) => (
+              <ProjectCard
+                slug={project.data.slug}
+                title={project.data.title}
+                description={project.data.description}
+                url={project.data.url}
+                github={project.data.github}
+                cover={project.data.cover}
+                mainTech={project.data.mainTech}
+                background={project.data.background}
+              />
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </main>
 </Layout>

@@ -7,6 +7,7 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       order: z.number(),
+      section: z.enum(["selected", "projects"]),
       slug: z.string(),
       title: z.string(),
       description: z.string(),
