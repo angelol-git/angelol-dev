@@ -10,23 +10,24 @@ const { slug, title, url, github, cover, description, mainTech, background } =
   class="group relative flex flex-col md:flex-row p-5 rounded-xl md:justify-between gap-6 border border-border-custom hover:shadow-lg transition-shadows duration-200"
 >
   <div class="flex flex-col gap-3 flex-1">
-    <div class="flex flex-col gap-2">
-      <a
-        href={`/projects/${slug}`}
-        class="flex gap-2 items-start after:absolute after:inset-0"
-      >
-        <div class="flex w-full justify-between items-center">
-          <h3 class="font-display text-xl text-ink">{title}</h3>
-          <ArrowUpRight size={20} stroke-width={1.5} class="text-ink-muted" />
+    <a href={`/projects/${slug}`} class="flex flex-col gap-6">
+      <div class="flex flex-col gap-2">
+        <div class="flex gap-2 items-start">
+          <div class="flex w-full justify-between">
+            <h3 class="font-display text-xl text-ink">{title}</h3>
+            <ArrowUpRight
+              size={20}
+              stroke-width={1.5}
+              class="text-ink-muted pt-1"
+            />
+          </div>
         </div>
-      </a>
-      <p class="text-sm text-ink-muted leading-relaxed">
-        {description}
-      </p>
-    </div>
+        <p class="text-sm text-ink-muted leading-relaxed">
+          {description}
+        </p>
+      </div>
 
-    <div class="mt-auto flex flex-col gap-4">
-      <ul class="flex flex-wrap gap-2 relative z-10">
+      <ul class="flex flex-wrap gap-2">
         {
           mainTech.map((tag: string) => {
             return (
@@ -37,7 +38,9 @@ const { slug, title, url, github, cover, description, mainTech, background } =
           })
         }
       </ul>
+    </a>
 
+    <div class="mt-auto flex flex-col gap-4">
       <div class="flex gap-4 relative z-10">
         {
           url && (
