@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import { FileUser } from "@lucide/astro";
+import Github from "../components/icons/Github.astro";
 
 const projects = await getCollection("projects");
 const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
@@ -18,10 +20,33 @@ const projectWork = sortedProjects.filter(
   description="Software Engineer building thoughtful web applications with React, Node, and modern web technologies. View my portfolio of full-stack applications and frontend projects."
 >
   <main class="flex flex-col w-full h-full max-w-2xl gap-10">
-    <div class="flex flex-col gap-1">
-      <p class="font-mono text-sm text-ink-muted">Software Engineer</p>
-
-      <h1 class="text-3xl font-display text-ink">Angelo Ladores</h1>
+    <div class="flex sm:justify-between sm:flex-row flex-col gap-2">
+      <div class="flex flex-col gap-1">
+        <p class="font-mono text-sm text-ink-muted">Software Engineer</p>
+        <h1 class="text-3xl font-display text-in text-nowrap">
+          Angelo Ladores
+        </h1>
+      </div>
+      <div class="flex gap-4">
+        <a
+          href="/Angelo_Ladores_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 hover:text-accent transition-colors duration-150"
+        >
+          <FileUser size="18" stroke-width="1" />
+          Resume
+        </a>
+        <a
+          href="https://github.com/angelol-git"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-1 hover:text-accent transition-colors duration-150"
+        >
+          <Github />
+          Github
+        </a>
+      </div>
     </div>
     <div class="flex flex-col gap-3 text-ink-light">
       <p>Software Engineer located in Ontario, Canada.</p>
