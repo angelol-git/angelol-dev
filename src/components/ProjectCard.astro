@@ -1,5 +1,6 @@
 ---
-import { ArrowUpRight, Globe } from "@lucide/astro";
+import ArrowUpRight from "./icons/ArrowUpRight.astro";
+import Globe from "./icons/Globe.astro";
 import Github from "./icons/Github.astro";
 import { Image } from "astro:assets";
 const { slug, title, url, github, cover, description, mainTech, background } =
@@ -21,7 +22,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
             <h3 class="font-display text-xl leading-tight">{title}</h3>
             <ArrowUpRight
               size={20}
-              stroke-width={1.5}
+              strokeWidth={1.5}
               class="pt-1 text-ink-muted transition-colors duration-150 group-hover:text-accent"
             />
           </a>
@@ -54,7 +55,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
               rel="noopener noreferrer"
               class="text-ink-muted hover:text-accent transition-colors duration-150"
             >
-              <Globe size={18} stroke-width={1.5} />
+              <Globe size={18} strokeWidth={1.5} />
             </a>
           )
         }
