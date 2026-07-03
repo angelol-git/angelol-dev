@@ -1,0 +1,34 @@
+---
+order: 1
+section: projects
+slug: recipe
+title: "Rambutan"
+description: "A full-stack recipe management app that uses Google Gemini to parse, modify and organize recipes."
+url: "https://myrambutan.app/"
+github: "https://github.com/angelol-git/rambutan"
+cover: "../../assets/covers/recipe.jpg"
+mainTech: ["React", "TypeScript", "Express", "SQL", "AI"]
+background: "#F1EAE4"
+---
+
+<h3>Problem</h3>
+
+I found recipe management tedious. Many online recipes are frustrating due to intrusive ads, lengthy introductions and inconsistent formatting. Saving recipes from websites often involves manual copying and adapting recipes for different serving sizes, ingredient substitutes, or specific dietary restrictions. There was no easy way to iterate on recipes or asking questions without searching multiple sources.
+
+<h3>Solution</h3>
+
+I created a full-stack recipe manager that uses AI to automate recipe extraction and modification. Users can paste URLs or text to automatically generate structured recipes, scale ingredients for different serving sizes and make ingredient substitutions. When an adjustment is made, a new variation of that recipe is created. So it is easy to keep track and compare different versions of the same recipe.
+
+<h3>Implementation Highlights</h3>
+
+- Built the frontend with React and TypeScript so recipe editing, chat-based modifications, and version navigation could behave like a single app instead of disconnected forms.
+- Used Express and SQLite to keep the backend simple while still supporting authentication, saved recipes, tags, and version history.
+- Prioritized structured recipe extraction by parsing JSON-LD first, then falling back to cleaned HTML scraping when sites did not expose usable schema data.
+- Added AI guardrails and validation around parsing and modification flows so malformed model output did not break the app.
+
+<h3>Technical Challenges</h3>
+
+- **Guest vs. Authenticated User Flow**: Initially built the app for authenticated users only with full database persistence, but realized forcing account creation before trying the app created friction for potential users. Refactored the authentication layer to support both flows by implementing optionalAuth middleware that attaches req.user for logged-in users or leaves it null for guests. This allowed the existing recipe creation endpoint to either save to the database. While guests recipes saved in the browser local storage.
+- **Recipe Versioning**: Users want to modify recipes through AI (scaling servings, making substitutions) but need to preserve the original and navigate between different versions. Traditional AI chat apps present conversations where previous responses scroll away and become difficult to reference. Instead of infinite scrolling, users navigate between recipe iterations with ChatNavigation controls that preserve the complete version history.
+- **AI Prompt Engineering**: LLMs can return unpredictable responses, malformed JSON or irrelevant messages when the user input off-topic messages. Created prompts to handle recipe extraction, modification detection (scaling, substitutions), and content relevancy guardrails. Implemented fallback validation when AI returns malformed JSON or empty responses.
+- **Web Scraping Reliability**: Recipe sites have inconsistent HTML structures. Used Cheerio to parse JSON-LD schema when available, with HTML-to-Markdown fallback for unstructured pages.

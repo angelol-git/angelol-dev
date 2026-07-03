@@ -18,26 +18,13 @@ The client originally had this portfolio built with a website builder, but the s
 
 This project rebuilds the portfolio as a custom website with a cleaner structure for long-form case studies and more consistent behavior across devices. Users can browse projects and read organized case studies in a more responsive, maintainable interface.
 
-<h3> Demo </h3>
+<h3>Implementation Highlights</h3>
 
-<video autoplay loop muted playsinline width="672">
-  <source src="/demos/eladores_demo.webm" type="video/webm" />
-  <source src="/demos/eladores_demo.mp4" type="video/mp4" />
-</video>
-
-<h3>Notable Tech Used</h3>
-
-- **Astro**: To build the site structure and generate fast static pages for the homepage, about page, and case study routes.
-- **React**: Used for smaller interactive parts of the site such as the responsive header, mobile navigation, and copy-to-clipboard email button.
-- **Tailwind CSS**: Used to build the responsive layouts, spacing system, and typography styles across the site.
-- **Motion (formerly Framer Motion)**: For lightweight UI animation in sections that reveal content on scroll.
+- Rebuilt the site in Astro so most pages stay static and fast while still supporting reusable layouts for case studies.
+- Used React only for small interactive pieces like navigation and copy-to-clipboard behavior instead of making the whole site client-rendered.
+- Moved long-form project content into MDX so case studies could be edited in a structured, reusable format.
 
 <h3>Technical Challenges</h3>
 
 - **Structuring long form content**: The original website builder version made it difficult to present detailed project content in a clear and consistent way. I solved this by moving the case studies into MDX and building reusable content sections for text, images, and video.
 - **Balancing static content with interactivity**: Most of the site is content focused, but a few parts still needed client side behavior like the mobile menu. I solved this by using Astro for static pages and React via Astro Island architecture so components were supplied with browser state and event handling.
-
-<h3>Lessons Learned</h3>
-
-- **Custom code vs builder**: Rebuilding the site showed me how much easier it is to improve accessibility, responsiveness, and layout consistency when I have direct control over the code.
-- **Using Astro for content**: I learned how to keep most of the site static for simplicity and performance, while using React only for the parts that needed interactivity.

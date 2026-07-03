@@ -6,38 +6,36 @@ const { slug, title, url, github, cover, description, mainTech, background } =
   Astro.props;
 ---
 
-<li
-  class="group relative flex flex-col md:flex-row p-5 rounded-xl md:justify-between gap-6 border border-border-custom hover:shadow-lg transition-shadows duration-200"
+<article
+  class="group cursor-pointer grid gap-6 border-t border-border-custom py-8 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,1.3fr)_16rem] md:items-start"
 >
-  <a
-    href={`/projects/${slug}`}
-    aria-label={`View ${title} project`}
-    class="absolute inset-0 rounded-xl cursor-pointer"
-  ></a>
-
-  <div class="pointer-events-none relative z-10 flex flex-col gap-3 flex-1">
+  <div class="relative z-10 flex flex-col gap-3">
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
-        <div class="flex gap-2 items-start">
-          <div class="flex w-full justify-between">
-            <h3 class="font-display text-xl text-ink">{title}</h3>
+        <div class="flex w-full justify-between">
+          <a
+            href={`/projects/${slug}`}
+            aria-label={`View ${title} project`}
+            class="flex items-start gap-2 text-ink transition-colors duration-150 group-hover:text-accent"
+          >
+            <h3 class="font-display text-xl leading-tight">{title}</h3>
             <ArrowUpRight
               size={20}
               stroke-width={1.5}
-              class="text-ink-muted pt-1"
+              class="pt-1 text-ink-muted transition-colors duration-150 group-hover:text-accent"
             />
-          </div>
+          </a>
         </div>
         <p class="text-sm text-ink-muted leading-relaxed">
           {description}
         </p>
       </div>
 
-      <ul class="flex flex-wrap gap-2">
+      <ul class="flex flex-wrap gap-x-4 gap-y-2">
         {
           mainTech.map((tag: string) => {
             return (
-              <li class="font-mono text-xs px-3 py-1 rounded-full border border-ink-muted text-ink">
+              <li class="font-mono text-xs uppercase tracking-[0.12em] text-ink-muted">
                 {tag}
               </li>
             );
@@ -47,7 +45,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
     </div>
 
     <div class="mt-auto flex flex-col gap-4">
-      <div class="pointer-events-auto relative z-20 flex gap-4">
+      <div class="relative z-20 flex gap-4">
         {
           url && (
             <a
@@ -77,13 +75,18 @@ const { slug, title, url, github, cover, description, mainTech, background } =
     </div>
   </div>
 
-  <div class="pointer-events-none relative z-10 w-full md:w-64 shrink-0 overflow-hidden rounded-lg">
+  <a
+    href={`/projects/${slug}`}
+    aria-hidden="true"
+    tabindex="-1"
+    class="relative block overflow-hidden bg-border-custom"
+  >
     <Image
       src={cover}
       alt={title}
-      class="w-full h-48 md:h-full object-cover"
+      class="h-56 w-full object-cover transition-transform duration-300 md:h-full"
       loading="lazy"
       decoding="async"
     />
-  </div>
-</li>
+  </a>
+</article>

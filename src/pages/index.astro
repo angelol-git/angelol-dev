@@ -81,7 +81,7 @@ const projectWork = sortedProjects.filter(
           <h2 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
             Selected Work
           </h2>
-          <ul class="flex flex-col gap-6">
+          <div class="flex flex-col">
             {selectedWork.map((project) => (
               <ProjectCard
                 slug={project.data.slug}
@@ -94,7 +94,7 @@ const projectWork = sortedProjects.filter(
                 background={project.data.background}
               />
             ))}
-          </ul>
+          </div>
         </section>
       )
     }
@@ -104,7 +104,7 @@ const projectWork = sortedProjects.filter(
           <h2 class="font-mono uppercase tracking-[0.15em] text-ink-muted">
             Projects
           </h2>
-          <ul class="flex flex-col gap-6">
+          <div class="flex flex-col">
             {projectWork.map((project) => (
               <ProjectCard
                 slug={project.data.slug}
@@ -117,7 +117,7 @@ const projectWork = sortedProjects.filter(
                 background={project.data.background}
               />
             ))}
-          </ul>
+          </div>
         </section>
       )
     }

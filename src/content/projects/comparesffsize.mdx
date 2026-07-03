@@ -26,28 +26,15 @@ Built a 3D comparison tool that renders PC cases from real dimensions. Includes 
   <source src="/demos/comparesffsize_demo.mp4" type="video/mp4" />
 </video>
 
-<h3>Notable Tech Used</h3>
+<h3>Implementation Highlights</h3>
 
-<div>
-<h4>React Three Fiber/Three.js</h4>
-
-- React Three Fiber is an abstraction layer for Three.js (Three.js is a library for rendering 3D objects in the web)
-- Capable of rendering 3D boxes representing PC cases from real dimensions (width x height x length)
-- Uses a camera system so users can zoom and view multiple angles
-- React Three Fiber's robust ecosystem includes Drei. Drei adds additional helpers such as Bounds for an auto-fitting camera, Orbit Controls for user navigation in the canvas, and Edges to outline case boxes clearly.
-
-</div>
+- Used React Three Fiber and Drei to render cases from real dimensions and keep the 3D scene manageable inside React.
+- Added a pre-populated data set plus custom item support so users could compare existing cases without entering everything manually.
+- Kept the app lightweight with a client-side JSON data source instead of introducing a backend for a mostly static catalog.
 
 <h3>Technical Challenges</h3>
 
 - **3D Scenes and Camera Positioning**: When rendering multiple objects it becomes difficult to guarantee every item fits in the same view. To ensure all objects fit in view, the camera was auto-centered using drei helpers. Object positions were calculated dynamically based on their widths and gaps, updating bounds whenever the selection changed.
 - **Drag and Drop**: The items list should be re ordered so the user can compare items side by side in the canvas. I originally implemented a drag and drop system using the native HTML Drag and Drop API however it does not support mobile input or keyboard events. An external library dnd-kit was used to provide additional accessibility.
-- **Form State Management**: The item form handles both creating new cases and editing existing ones, with different validation and initial states. Used a mode prop and conditional initialization. Plus careful handling of the category switches which clears or restores form data depending on context.
 - **Responsive Mobile Layout**: The split-pane design (3D canvas + item list) does not work well on mobile screens. This was solved by implementing a toggle view tab system where mobile users switch between the canvas and item list views.
-- **Database Management**: A JSON file was used as a simple client-side database to avoid setting up a server. Initially easy to manage, it became cumbersome as the project grew. A basic form was added to edit and download an updated JSON file.
-
-<h3>Lessons Learned</h3>
-
-- **React Three Fiber abstraction layer**: Learned how React Three Fiber simplifies Three.js development by treating 3D objects as React components with props and hooks, making 3D scenes more maintainable and declarative compared to imperative Three.js code.
-- **Drag and Drop accessibility**: Gained experience implementing accessible drag-and-drop using dnd-kit, including keyboard navigation support and proper ARIA labels for screen reader users.
-- **Data fetching with Caching**: Understood how TanStack Query's caching eliminates redundant network requests and provides consistent loading/error states across components, simplifying async data handling compared to manual fetch implementations.
+- **Data Management**: A JSON file was enough to avoid backend overhead early on, but became harder to maintain as the catalog grew. I added tooling to edit and export updated data instead of treating it as a static hand-edited file.
