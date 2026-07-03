@@ -1,22 +1,19 @@
 ---
 import ArrowUpRight from "./icons/ArrowUpRight.astro";
-import Globe from "./icons/Globe.astro";
-import Github from "./icons/Github.astro";
 import { Image } from "astro:assets";
-const { slug, title, url, github, cover, description, mainTech, background } =
-  Astro.props;
+const { slug, title, cover, description, mainTech } = Astro.props;
 ---
 
-<article
-  class="group cursor-pointer grid gap-6 border-t border-border-custom py-8 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,1.3fr)_16rem] md:items-start"
+<a
+  href={`/projects/${slug}`}
+  aria-label={`View ${title} project`}
+  class="group grid gap-6 border-t border-border-custom py-8 first:border-t-0 first:pt-0 md:grid-cols-[minmax(0,1.3fr)_16rem] md:items-start"
 >
   <div class="relative z-10 flex flex-col gap-3">
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-2">
         <div class="flex w-full justify-between">
-          <a
-            href={`/projects/${slug}`}
-            aria-label={`View ${title} project`}
+          <div
             class="flex items-start gap-2 text-ink transition-colors duration-150 group-hover:text-accent"
           >
             <h3 class="font-display text-xl leading-tight">{title}</h3>
@@ -25,7 +22,7 @@ const { slug, title, url, github, cover, description, mainTech, background } =
               strokeWidth={1.5}
               class="pt-1 text-ink-muted transition-colors duration-150 group-hover:text-accent"
             />
-          </a>
+          </div>
         </div>
         <p class="text-sm text-ink-muted leading-relaxed">
           {description}
@@ -44,50 +41,15 @@ const { slug, title, url, github, cover, description, mainTech, background } =
         }
       </ul>
     </div>
-
-    <div class="mt-auto flex flex-col gap-4">
-      <div class="relative z-20 flex gap-4">
-        {
-          url && (
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-ink-muted hover:text-accent transition-colors duration-150"
-            >
-              <Globe size={18} strokeWidth={1.5} />
-            </a>
-          )
-        }
-
-        {
-          github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-ink-muted hover:text-accent transition-colors duration-150"
-            >
-              <Github />
-            </a>
-          )
-        }
-      </div>
-    </div>
   </div>
 
-  <a
-    href={`/projects/${slug}`}
-    aria-hidden="true"
-    tabindex="-1"
-    class="relative block overflow-hidden bg-border-custom"
-  >
+  <div class="relative block overflow-hidden bg-border-custom">
     <Image
       src={cover}
       alt={title}
-      class="h-56 w-full object-cover transition-transform duration-300 md:h-full"
+      class="w-full object-cover transition-transform duration-300 md:h-full"
       loading="lazy"
       decoding="async"
     />
-  </a>
-</article>
+  </div>
+</a>
