@@ -22,7 +22,7 @@ I created a full-stack recipe card manager that uses AI to automate recipe extra
 <h3>Implementation Highlights</h3>
 
 - Built the frontend with React and TypeScript so recipe editing, chat-based modifications, and version navigation could behave like a single app instead of disconnected forms.
-- Used Express and SQLite to keep the backend simple while still supporting authentication, saved recipes, tags, and version history.
+- Used Express and PostgreSQL to for the backend supporting authentication, saved recipes, tags, and version history.
 - Prioritized structured recipe extraction by parsing JSON-LD first, then falling back to cleaned HTML scraping when sites did not expose usable schema data.
 - Added AI guardrails and validation around parsing and modification flows so malformed model output did not break the app.
 
